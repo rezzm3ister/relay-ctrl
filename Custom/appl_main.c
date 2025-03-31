@@ -17,14 +17,12 @@ void custom_init(void)
     HAL_TIM_Base_Start_IT(&htim2);
 }
 
-
+//does things every 1ms
 void ms_loop(void) //1khz
 {
-    // TIM2->SR=0;
     if(t1<1000)
     {
         t1++;
-        // return;
     }
     else
     {
@@ -34,11 +32,13 @@ void ms_loop(void) //1khz
 
 }
 
+//does things every 1s
 void sec_loop(void) //operates every second
 {
     led_toggle_c13();
 }
 
+//does things whenever it can
 void main_loop(void)
 {
     if(one_sec_flag)
