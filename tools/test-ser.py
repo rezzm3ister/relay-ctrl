@@ -21,7 +21,8 @@ modb.serial.parity=serial.PARITY_EVEN
 
 # modb.serial.write([1,2,3,4,5,6,7,8,9,10,11])
 # printhex(modb.serial.read(100))
-modb.write_register(0x3,33,functioncode=6)
-modb.write_registers(0x5,[69,69,69])
-for i in range(100):
-    print(modb.read_registers(0x1,125))
+# modb.write_register(0x3,33,functioncode=6)
+# modb.write_registers(0x5,[69,69,69])
+for i in range(1):
+    print(modb.read_registers(0x0,20))
+    print(modb.read_registers(0x20,3))

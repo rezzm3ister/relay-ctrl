@@ -1,4 +1,5 @@
 #include "mgr_uart.h"
+#include "mgr_i2c.h"
 
 extern UART_HandleTypeDef huart1;
 
@@ -67,13 +68,19 @@ void uart_ondatarecv(void)
             break;
     }
     
-    
     uint16_t crc=0;
 
     crc=crc_modbus(rsp_msg,rsp_len);
     rsp_msg[rsp_len]=crc&0xff;
     rsp_msg[rsp_len+1]=crc>>8;
     HAL_UART_Transmit_DMA(&huart1,rsp_msg,rsp_len+2);
+
+    //post-write functions
+    if(SET_VALUES)
+    {
+        ds3231_set_from_modbus();
+        SET_VALUES=0;
+    }
 
 }
 

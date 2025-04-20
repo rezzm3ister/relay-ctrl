@@ -15,6 +15,8 @@ void custom_init(void)
 {
     // HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
     HAL_TIM_Base_Start_IT(&htim2);
+    init_i2c();
+
 }
 
 //does things every 1ms
@@ -36,6 +38,7 @@ void ms_loop(void) //1khz
 void sec_loop(void) //operates every second
 {
     led_toggle_c13();
+    update_i2c();
 }
 
 //does things whenever it can
@@ -49,5 +52,6 @@ void main_loop(void)
         uptime_timer++;
     }
     uart_mainloop();
+    update_led();
 }
 
