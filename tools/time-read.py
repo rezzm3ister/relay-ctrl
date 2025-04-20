@@ -19,4 +19,4 @@ date    =str(data[4])
 month   =str(data[5])
 year    =str(data[6])
 
-print("stm says it is now: "+hour+":"+min+":"+sec+" ,"+month+"/"+date+"/"+year)
+print("stm says it is now: "+hour+":"+min+":"+sec+","+dow+", "+month+"/"+date+"/"+year)
