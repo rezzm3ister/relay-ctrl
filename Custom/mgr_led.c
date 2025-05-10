@@ -24,6 +24,10 @@ void led_toggle_c13(void)
     }
     
     HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,led_en);
+    // HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,led_en);
+    // HAL_GPIO_WritePin(GPIOB,GPIO_PIN_1,led_en);
+    // HAL_GPIO_WritePin(GPIOB,GPIO_PIN_3,led_en);
+    // HAL_GPIO_WritePin(GPIOB,GPIO_PIN_4,led_en);
     
 }
 
@@ -31,11 +35,11 @@ void led_toggle_c13(void)
 void update_led(void)
 {
 
-    if(CUR_HOUR>=7 && CUR_HOUR<19)
+    if(CUR_HOUR>=7 && CUR_HOUR<20)
     {
         led_state = LED_SOLAR;
     }
-    else if(CUR_HOUR>=19 || CUR_HOUR<7)
+    else if(CUR_HOUR>=20 || CUR_HOUR<7)
     {
         led_state = LED_MAINS;
     }

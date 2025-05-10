@@ -31,6 +31,7 @@ void ms_loop(void) //1khz
         t1=0;
         one_sec_flag=1;
     }
+    relay_1k();
 
 }
 
@@ -53,5 +54,7 @@ void main_loop(void)
     }
     uart_mainloop();
     update_led();
+    relay_update();
+    // HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, 0);
 }
 

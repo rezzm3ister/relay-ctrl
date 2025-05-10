@@ -23,7 +23,7 @@ typedef enum
     RELAY_OVERRIDE_MAINS_TO_SOLAR,
     RELAY_OVERRIDE_SOLAR,
     RELAY_OVERRIDE_SOLAR_TO_MAINS,
-} relay_arr_state_t
+} relay_arr_state_t;
 
 
 #endif

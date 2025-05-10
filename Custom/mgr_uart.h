@@ -25,7 +25,7 @@ extern uint16_t modb_db[MODB_SIZE];
 #define SET_YEAR            modb_db[0x16]
 #define SET_VALUES          modb_db[0x1F]
 
-#define MAINLOOP_DUR        modb_db[0x30]
+#define FORCE_TOGGLE        modb_db[0x30]
 
 void uart_mainloop(void);
 #endif

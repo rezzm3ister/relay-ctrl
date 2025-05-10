@@ -14,18 +14,29 @@ static bool relay_istoggletime(void)
     {
         return true;
     }
-    if(CUR_HOUR==4 && CUR_MINUTE==0 && CUR_SECOND==0)
+    else if(CUR_HOUR==4 && CUR_MINUTE==0 && CUR_SECOND==0)
     {
         return true;
     }
-    if(CUR_HOUR==5 && CUR_MINUTE==30 && CUR_SECOND==0)
+    else if(CUR_HOUR==5 && CUR_MINUTE==30 && CUR_SECOND==0)
     {
         return true;
     }
-    if(CUR_HOUR==7 && CUR_MINUTE==0 && CUR_SECOND==0)
+    else if(CUR_HOUR==7 && CUR_MINUTE==0 && CUR_SECOND==0)
     {
         return true;
     }
+    //debug time check
+    // else if(CUR_HOUR==20 && CUR_MINUTE==54 && CUR_SECOND==0)
+    // {
+    //     return true;
+    // }
+    else if(FORCE_TOGGLE)
+    {
+        FORCE_TOGGLE=0;
+        return true;
+    }
+    return false;
 
     //double off at noon has been removed due to solar addition
     
@@ -52,6 +63,10 @@ void relay_1k(void)
             relay_state=RELAY_OFF;
         }
     }
+    else
+    {
+        relay_timer=0;
+    }
 }
 
 void relay_update(void)
@@ -59,21 +74,21 @@ void relay_update(void)
     switch(relay_state)
     {
         case RELAY_OFF:
-            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_RESET);
             if(relay_istoggletime())
             {
                 relay_state=RELAY_TURN_ON;
             }
             break;
         case RELAY_TURN_ON:
-            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);
             relay_state=RELAY_ON;
             break;
         case RELAY_ON:
             break;
         case RELAY_TURN_OFF:
-            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-            relay_state=RELAY_OFF;
+            HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_RESET);
+            // relay_state=RELAY_OFF;
             break;
     }
 }

@@ -370,8 +370,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, Relay1_Pin|Relay2_Pin|LED_Mains_Pin|LED_Solar_Pin
-                          |LED_Override_Pin|Relay3_Pin|Relay4_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, Relay1_Pin|Relay2_Pin|Relay3_Pin|Relay4_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, LED_Mains_Pin|LED_Solar_Pin|LED_Override_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : PC13 */
   GPIO_InitStruct.Pin = GPIO_PIN_13;
@@ -380,10 +382,22 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Relay1_Pin Relay2_Pin LED_Mains_Pin LED_Solar_Pin
-                           LED_Override_Pin Relay3_Pin Relay4_Pin */
-  GPIO_InitStruct.Pin = Relay1_Pin|Relay2_Pin|LED_Mains_Pin|LED_Solar_Pin
-                          |LED_Override_Pin|Relay3_Pin|Relay4_Pin;
+  /*Configure GPIO pin : Relay1_Pin */
+  GPIO_InitStruct.Pin = Relay1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(Relay1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : Relay2_Pin Relay3_Pin Relay4_Pin */
+  GPIO_InitStruct.Pin = Relay2_Pin|Relay3_Pin|Relay4_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : LED_Mains_Pin LED_Solar_Pin LED_Override_Pin */
+  GPIO_InitStruct.Pin = LED_Mains_Pin|LED_Solar_Pin|LED_Override_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
