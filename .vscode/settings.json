@@ -4,6 +4,7 @@
         "stdint.h": "c",
         "main.h": "c",
         "mgr_led.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "mgr_i2c.h": "c"
     }
 }

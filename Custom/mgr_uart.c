@@ -88,7 +88,8 @@ void uart_ondatarecv(void)
 
 void uart_mainloop(void)
 {
-    HAL_UARTEx_ReceiveToIdle_IT(&huart1,uart_rx_buffer,300);
+    // HAL_UARTEx_ReceiveToIdle_IT(&huart1,uart_rx_buffer,300);
+    HAL_UARTEx_ReceiveToIdle_DMA(&huart1,uart_rx_buffer,300);
     // HAL_UART_Receive_IT(&huart1,uart_rx_buffer,1);
     if(USART1->SR & 0b1111)
     {
